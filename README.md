@@ -15,6 +15,8 @@ Pred: [77.97, 48.1, 51.95, 49.358000000000004, 46.813, 21.05, 92.2, 84.600000000
 
 # Cite
 
+DOI: https://doi.org/10.5281/zenodo.4090437
+
 ```
 @misc{gananath2016,
   author = {Gananath, R.},
@@ -23,6 +25,6 @@ Pred: [77.97, 48.1, 51.95, 49.358000000000004, 46.813, 21.05, 92.2, 84.600000000
   publisher = {GitHub},
   journal = {GitHub repository},
   howpublished = {\url{https://github.com/Gananath/Real}},
-  doi = {}
+  doi = {10.5281/zenodo.4090438 }
 }
 ```
