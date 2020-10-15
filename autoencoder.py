@@ -66,7 +66,7 @@ def prediction(sign, integer,decimal):
         arr.append(real)
     return arr
 
-def diff_loss(output,target):
+def difference_loss(output,target):
     target = pt.argmax(target,dim=2)
     output = pt.argmax(output,dim=2)
     place_holder = pt.tensor([10**4,10**3,10**2,10*1,1])
@@ -100,7 +100,7 @@ class Model(pt.nn.Module):
         # Activtions
         self.relu = pt.nn.ReLU()
         self.soft = pt.nn.Softmax(dim=2)
-        self.dropout = pt.nn.Dropout(0.1)
+        self.dropout = pt.nn.Dropout(0.05)
     def input_heads(self,x,y,z):
     
         o1 = self.inp_sign(x)
@@ -121,7 +121,7 @@ class Model(pt.nn.Module):
         x = self.relu(x)
         x = self.l2(x)
         x = self.relu(x)
-        x = self.dropout(x)
+        #x = self.dropout(x)
         x = self.l3(x)
         return self.relu(x)
     def forward(self,x,y,z):
@@ -155,7 +155,7 @@ place_value = 3
 whole_len= 2
 decimal_len = 3
 
-PATH = "model.pt"
+PATH = "/user/dir/path/model.pt" # please provide a your path here
 
 model = Model().double()
 
@@ -190,11 +190,11 @@ for i in range(100000):
     loss1 = criterion(o1, sign)
     loss2 = criterion(o2, int_matrix)
     loss3 = criterion(o3, dec_matrix)
-    loss4 = diff_loss(o2, int_matrix)
+    loss4 = difference_loss(o2, int_matrix)
     
     loss = loss1 + loss2 + loss3 + loss4
     loss.backward()
-    
+    pt.nn.utils.clip_grad_norm_(model.parameters(),max_norm=1)
     opt.step()
     if i%1000==0:
         print("\n Epoch: ",i)
@@ -209,40 +209,6 @@ for i in range(100000):
         pass
 
 
-''''
-
-
-batch_size =10
-place_value = 3
-whole_len= 2
-decimal_len = 3
-
-testPy1()
-
-def testPy1():
-    # Visual test
-    whole, decimal = random_real_numbers(batch_size,place_value)
-    int_matrix, dec_matrix = get_real_num_matrix(whole,decimal)
-    real = whole+decimal
-    for i, j in zip(real,int_matrix):
-        print(i,"  ",np.argmax(j,axis=1))
-
-
-
-
-m = pt.nn.Softmax(dim=2)
-input = pt.tensor(int_matrix)
-m(input)
-
-pt.argmax(pt.tensor(int_matrix[0]),1)
-output = m(pt.tensor(int_matrix))
-
-pt.argmax(output[0],1)
-'''
-
-''''
-
-'''
 
 class CNNModel(pt.nn.Module):
     def __init__(self):
