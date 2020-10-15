@@ -155,7 +155,7 @@ place_value = 3
 whole_len= 2
 decimal_len = 3
 
-PATH = "/user/dir/path/model.pt" # please provide a your path here
+PATH = "/user/dir/path/model.pt" # please provide your path here
 
 model = Model().double()
 
