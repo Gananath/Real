@@ -1,6 +1,8 @@
 # Real
 Real number generation using neural network classification.
 
+Read More: https://gananath.github.io/real.html
+
 ![Screenshot](equations.jpeg)
 
 
